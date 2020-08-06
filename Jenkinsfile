@@ -22,9 +22,13 @@ node {
             println(Globals.NormalTimeout());
             println(currentBuild.result);
 
-            sh 'echo "Fail!"; exit 0'
+            sh 'echo "Test!"; exit 0'
         }
         echo 'This will run only if successful'
+
+        stage('Puzz') {
+            sh 'echo "Puzz!"; exit 0'
+        }
     } catch (e) {
         echo 'This will run only if failed'
 
