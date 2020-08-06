@@ -20,6 +20,8 @@ node {
     try {
         stage('Test') {
             println(Globals.NormalTimeout());
+            println(currentBuild);
+
             sh 'echo "Fail!"; exit 0'
         }
         echo 'This will run only if successful'
@@ -30,6 +32,8 @@ node {
         // we need to re-throw it, to ensure that the build is marked as failed
         throw e
     } finally {
+        println(currentBuild);
+
         def currentResult = currentBuild.result ?: 'SUCCESS'
         if (currentResult == 'UNSTABLE') {
             echo 'This will run only if the run was marked as unstable'
