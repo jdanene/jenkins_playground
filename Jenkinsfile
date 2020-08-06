@@ -22,7 +22,7 @@ node {
             println(Globals.NormalTimeout());
             println(currentBuild.result);
 
-            sh 'echo "Test!"; exit 0'
+            input "Does the staging environment look ok?"
         }
         echo 'This will run only if successful'
 
