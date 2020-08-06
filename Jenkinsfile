@@ -1,22 +1,25 @@
-class Example { 
-   static void main(String[] args) { 
-      // Initializing a local variable 
-      int a = 2
-        
-      //Check for the boolean condition 
-      if (a<100) { 
-         //If the condition is true print the following statement 
-         println("The value is less than 100"); 
-      } else { 
-         //If the condition is false print the following statement 
-         println("The value is greater than 100"); 
-      } 
-   } 
+
+class Globals {
+  static int generalBuildTime = 30;
+  static int testRolesBuildTimeout = 30;
+  static int recoveryStageAndStashTime = 10;
+  static int recoveryTimeout = 20;
+  static int pilTimeout = 30;
+
+  static int NormalTimeout() {
+    return generalBuildTime + testRolesBuildTimeout;
+  }
+
+  static int ExtendedTimeout() {
+    return generalBuildTime + testRolesBuildTimeout + recoveryStageAndStashTime + recoveryTimeout + pilTimeout;
+  }
 }
+
 
 node {
     try {
         stage('Test') {
+            println(Globals.NormalTimeout());
             sh 'echo "Fail!"; exit 0'
         }
         echo 'This will run only if successful'
