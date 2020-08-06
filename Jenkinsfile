@@ -20,7 +20,7 @@ node {
     try {
         stage('Test') {
             println(Globals.NormalTimeout());
-            println(currentBuild);
+            println(currentBuild.result);
 
             sh 'echo "Fail!"; exit 0'
         }
@@ -32,7 +32,7 @@ node {
         // we need to re-throw it, to ensure that the build is marked as failed
         throw e
     } finally {
-        println(currentBuild);
+        println(currentBuild.result );
 
         def currentResult = currentBuild.result ?: 'SUCCESS'
         if (currentResult == 'UNSTABLE') {
